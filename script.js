@@ -8,6 +8,7 @@ $(function() {
     var marginBottomOffset = 10; // When pinned at the bottom, the desired space between bottom of iFrame and bottom of window.
     var marginTopOffset = 10; // When pinned at the top, the desired space between top of iFrame and top of window.
     var naturalIframeHeight = 700; // The natural iframe height which would show all content of the editor without scrolling.
+    var minIframeHeight = 200; // The minimum height of the iframe that we allow.
 
     var updatePosition = function() {
       var oldReplyBounds = $oldReply[0].getBoundingClientRect();
