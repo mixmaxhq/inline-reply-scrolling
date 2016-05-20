@@ -1,6 +1,6 @@
 $(function() {
   var setScrollOffset = function(offset){
-    $('.js-editor-body').scrollTop(offset);
+    $('.js-editor-wrapper').scrollTop(offset);
   };
 
   var setIframeHeight = function() {
