@@ -14,9 +14,10 @@ $(function() {
       var oldReplyBoxBounds = $oldReply[0].getBoundingClientRect();
       var topOffset = Math.max(oldReplyBoxBounds.top, marginTopOffset);
       var leftOffset = oldReplyBoxBounds.left;
-
       var docHeight = document.documentElement.clientHeight;
-      var newHeight = Math.min(docHeight - oldReplyBoxBounds.top - marginBottomOffset , naturalIframeHeight);
+
+      var viewPortHeight = docHeight - marginBottomOffset - marginTopOffset;
+      var newHeight = Math.min(Math.min(docHeight - oldReplyBoxBounds.top - marginBottomOffset , naturalIframeHeight), viewPortHeight);
 
       if (oldReplyBoxBounds.top < 10) {
         var scrollOffset = Math.abs(oldReplyBoxBounds.top - marginTopOffset);
