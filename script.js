@@ -21,7 +21,7 @@ $(function() {
 
       if (distanceFromBottom > marginBottomOffset) {
         newHeight = Math.max(oldReplyBounds.bottom - marginBottomOffset, minIframeHeight);
-        topOffset = oldReplyBounds.bottom < minIframeHeight ? oldReplyBounds.bottom - minIframeHeight : Math.max(oldReplyBounds.top, marginTopOffset);
+        topOffset = oldReplyBounds.bottom - marginBottomOffset < minIframeHeight ? oldReplyBounds.bottom - minIframeHeight : Math.max(oldReplyBounds.top, marginTopOffset);
       } else {
         newHeight = Math.min(Math.min(docHeight - oldReplyBounds.top - marginBottomOffset , naturalIframeHeight), viewPortHeight);
         topOffset = Math.max(oldReplyBounds.top, marginTopOffset);
