@@ -3,25 +3,25 @@ $(function() {
     var $oldReply = $('.js-old-reply-parent');
     var $mixmaxEditorIframe = $('.js-mixmax-editor-iframe');
 
-    var oldReplyBoxBounds = $oldReply[0].getBoundingClientRect();
+    var oldReplyBounds = $oldReply[0].getBoundingClientRect();
 
     var marginBottomOffset = 10; // When pinned at the bottom, the desired space between bottom of iFrame and bottom of window.
     var marginTopOffset = 10; // When pinned at the top, the desired space between top of iFrame and top of window.
     var naturalIframeHeight = 700; // The natural iframe height which would show all content of the editor without scrolling.
 
     var updatePosition = function() {
-      var oldReplyBoxBounds = $oldReply[0].getBoundingClientRect();
-      var topOffset = Math.max(oldReplyBoxBounds.top, marginTopOffset);
-      var leftOffset = oldReplyBoxBounds.left;
+      var oldReplyBounds = $oldReply[0].getBoundingClientRect();
+      var topOffset = Math.max(oldReplyBounds.top, marginTopOffset);
+      var leftOffset = oldReplyBounds.left;
       var docHeight = document.documentElement.clientHeight;
 
       var viewPortHeight = docHeight - marginBottomOffset - marginTopOffset;
-      var newHeight = Math.min(Math.min(docHeight - oldReplyBoxBounds.top - marginBottomOffset , naturalIframeHeight), viewPortHeight);
+      var newHeight = Math.min(Math.min(docHeight - oldReplyBounds.top - marginBottomOffset , naturalIframeHeight), viewPortHeight);
 
-      if (oldReplyBoxBounds.top < 10) {
-        var scrollOffset = Math.abs(oldReplyBoxBounds.top - marginTopOffset);
+      if (oldReplyBounds.top < 10) {
+        var scrollOffset = Math.abs(oldReplyBounds.top - marginTopOffset);
         $mixmaxEditorIframe[0].contentWindow.postMessage(scrollOffset, '*');
-      } else if(oldReplyBoxBounds.top > 9) {
+      } else if(oldReplyBounds.top > 9) {
         $mixmaxEditorIframe[0].contentWindow.postMessage(0, '*');
       }
 
