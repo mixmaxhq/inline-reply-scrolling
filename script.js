@@ -5,10 +5,9 @@ $(function() {
 
     var oldReplyBoxBounds = $oldReply[0].getBoundingClientRect();
 
-    var marginBottomOffset = 10; // Desired between bottom of iFrame and bottom of window.
-    var marginTopOffset = 10; // Desired between bottom of iFrame and bottom of window.
-
-    var naturalIframeHeight = 700;
+    var marginBottomOffset = 10; // When pinned at the bottom, the desired space between bottom of iFrame and bottom of window.
+    var marginTopOffset = 10; // When pinned at the top, the desired space between top of iFrame and top of window.
+    var naturalIframeHeight = 700; // The natural iframe height which would show all content of the editor without scrolling.
 
     var updatePosition = function() {
       var oldReplyBoxBounds = $oldReply[0].getBoundingClientRect();
