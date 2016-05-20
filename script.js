@@ -1,6 +1,6 @@
 $(function() {
     var $mixmaxReply = $('.js-mixmax-reply-box');
-    var $oldReply = $('.js-old-reply-box');
+    var $oldReply = $('.js-old-reply-parent');
     var $mixmaxEditorIframe = $('.js-mixmax-editor-iframe');
 
     var oldReplyBoxBounds = $oldReply[0].getBoundingClientRect();
