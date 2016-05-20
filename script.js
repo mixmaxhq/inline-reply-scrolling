@@ -8,7 +8,7 @@ $(function() {
     var marginBottomOffset = 10; // Desired between bottom of iFrame and bottom of window.
     var marginTopOffset = 10; // Desired between bottom of iFrame and bottom of window.
 
-    var maxIframeHeight = 700;
+    var naturalIframeHeight = 700;
 
     var updatePosition = function() {
 
@@ -20,13 +20,10 @@ $(function() {
       var docHeight = document.documentElement.clientHeight;
       var newHeight;
 
-      console.log(docHeight);
-      console.log(oldReplyBoxBounds.top);
-
-      if (docHeight - oldReplyBoxBounds.top - marginTopOffset < maxIframeHeight) {
+      if (docHeight - oldReplyBoxBounds.top - marginTopOffset < naturalIframeHeight) {
         newHeight = docHeight - topOffset - marginBottomOffset;
       } else if(oldReplyBoxBounds.top > marginTopOffset) {
-        newHeight = maxIframeHeight;
+        newHeight = naturalIframeHeight;
       }
 
       if (oldReplyBoxBounds.top < 10) {
