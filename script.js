@@ -14,9 +14,16 @@ $(function() {
       var topOffset = Math.max(oldReplyBounds.top, marginTopOffset);
       var leftOffset = oldReplyBounds.left;
       var docHeight = document.documentElement.clientHeight;
-
+      var distanceFromBottom = docHeight - oldReplyBounds.bottom;
+      var newheight;
       var viewPortHeight = docHeight - marginBottomOffset - marginTopOffset;
-      var newHeight = Math.min(Math.min(docHeight - oldReplyBounds.top - marginBottomOffset , naturalIframeHeight), viewPortHeight);
+
+      if (distanceFromBottom > marginBottomOffset) {
+        newHeight = oldReplyBounds.bottom - marginBottomOffset;
+      } else {
+        newHeight = Math.min(Math.min(docHeight - oldReplyBounds.top - marginBottomOffset , naturalIframeHeight), viewPortHeight);
+      }
+
 
       if (oldReplyBounds.top < 10) {
         var scrollOffset = Math.abs(oldReplyBounds.top - marginTopOffset);
