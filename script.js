@@ -12,19 +12,20 @@ $(function() {
 
     var updatePosition = function() {
       var oldReplyBounds = $oldReply[0].getBoundingClientRect();
-      var topOffset = Math.max(oldReplyBounds.top, marginTopOffset);
       var leftOffset = oldReplyBounds.left;
       var docHeight = document.documentElement.clientHeight;
       var distanceFromBottom = docHeight - oldReplyBounds.bottom;
       var newheight;
+      var topOffset;
       var viewPortHeight = docHeight - marginBottomOffset - marginTopOffset;
 
       if (distanceFromBottom > marginBottomOffset) {
-        newHeight = oldReplyBounds.bottom - marginBottomOffset;
+        newHeight = Math.max(oldReplyBounds.bottom - marginBottomOffset, minIframeHeight);
+        topOffset = oldReplyBounds.bottom < minIframeHeight ? oldReplyBounds.bottom - minIframeHeight : Math.max(oldReplyBounds.top, marginTopOffset);
       } else {
         newHeight = Math.min(Math.min(docHeight - oldReplyBounds.top - marginBottomOffset , naturalIframeHeight), viewPortHeight);
+        topOffset = Math.max(oldReplyBounds.top, marginTopOffset);
       }
-
 
       if (oldReplyBounds.top < 10) {
         var scrollOffset = Math.abs(oldReplyBounds.top - marginTopOffset);
