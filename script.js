@@ -8,6 +8,11 @@ $(function() {
     var naturalIframeHeight = 700; // The natural iframe height which would show all content of the editor without scrolling.
     var minIframeHeight = 240; // The minimum height of the iframe that we allow.
 
+    var updateNaturalIFrameHeight = function(height) {
+      naturalIframeHeight = height;
+      $oldReply.height(naturalIframeHeight);
+    };
+
     var updatePosition = function() {
       var docHeight = document.documentElement.clientHeight;
       var oldReplyBounds = $oldReply[0].getBoundingClientRect();
@@ -28,6 +33,14 @@ $(function() {
           'height': newHeight + 'px'
         });
     };
+
+    var handlePostMessage = function(e) {
+      if (e.data.message == 'setIframeHeight') {
+        updateNaturalIFrameHeight(e.data.iframeHeight);
+      }
+    };
+
+    window.addEventListener("message", handlePostMessage, false);
 
     updatePosition();
 

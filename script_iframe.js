@@ -6,8 +6,10 @@ $(function() {
   var setEditorWidth = function(width){
     $('.js-editor-body').width(width);
 
-    // Get new height of editor.
-    // Send height to parent of this iframe so this iframe can be resized.
+    parent.postMessage({
+      message: 'setIframeHeight',
+      iframeHeight: 500
+    }, '*');
   };
 
   var handlePostMessage = function(e) {
