@@ -11,20 +11,12 @@ $(function() {
     var naturalIframeHeight = 700;
 
     var updatePosition = function() {
-
       var oldReplyBoxBounds = $oldReply[0].getBoundingClientRect();
-      var mixmaxReplyBoxBounds = $mixmaxReply[0].getBoundingClientRect();
       var topOffset = Math.max(oldReplyBoxBounds.top, marginTopOffset);
       var leftOffset = oldReplyBoxBounds.left;
 
       var docHeight = document.documentElement.clientHeight;
-      var newHeight;
-
-      if (docHeight - oldReplyBoxBounds.top - marginTopOffset < naturalIframeHeight) {
-        newHeight = docHeight - topOffset - marginBottomOffset;
-      } else if(oldReplyBoxBounds.top > marginTopOffset) {
-        newHeight = naturalIframeHeight;
-      }
+      var newHeight = Math.min(docHeight - oldReplyBoxBounds.top - marginBottomOffset , naturalIframeHeight);
 
       if (oldReplyBoxBounds.top < 10) {
         var scrollOffset = Math.abs(oldReplyBoxBounds.top - marginTopOffset);
@@ -37,7 +29,7 @@ $(function() {
         .css({
           'transform': 'translateY(' + topOffset + 'px) translateX(' + leftOffset + 'px) translateZ(0)',
           'width': $oldReply.outerWidth() + 'px',
-          'height': newHeight
+          'height': newHeight + 'px'
         });
     };
 
