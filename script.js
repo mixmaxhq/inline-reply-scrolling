@@ -19,7 +19,7 @@ $(function() {
 
       // Forward scroll events to the iframe.
       var scrollOffset = oldReplyBounds.top < marginTopOffset ? Math.abs(oldReplyBounds.top - marginTopOffset) : 0;
-      $mixmaxEditorIframe[0].contentWindow.postMessage(scrollOffset, '*');
+      $mixmaxEditorIframe[0].contentWindow.postMessage({message: 'setScrollOffset', scrollOffset:scrollOffset }, '*');
 
       $mixmaxReply
         .css({
@@ -37,6 +37,11 @@ $(function() {
 
     $(window).on('resize', function(){
       updatePosition();
+      editorWidth = $oldReply.width();
+      $mixmaxEditorIframe[0].contentWindow.postMessage({
+        message: 'setEditorWidth',
+        editorWidth: editorWidth
+      }, '*');
     });
 
     $(document).on('wheel', function(){
