@@ -11,21 +11,21 @@ $(function() {
     var minIframeHeight = 240; // The minimum height of the iframe that we allow.
 
     var updatePosition = function() {
+      var docHeight = document.documentElement.clientHeight;
+
       var oldReplyBounds = $oldReply[0].getBoundingClientRect();
       var leftOffset = oldReplyBounds.left;
-      var docHeight = document.documentElement.clientHeight;
       var distanceFromBottom = Math.max(docHeight - oldReplyBounds.bottom - marginBottomOffset, 0);
+
       var viewPortHeight = docHeight - marginTopOffset - marginBottomOffset - distanceFromBottom;
       var maxIframeHeight = Math.min(viewPortHeight, naturalIframeHeight);
+
       var newHeight = Math.min(docHeight - oldReplyBounds.top - marginBottomOffset , maxIframeHeight);
       var topOffset = newHeight < minIframeHeight && oldReplyBounds.top < marginTopOffset ? -(minIframeHeight - oldReplyBounds.bottom) : Math.max(oldReplyBounds.top, marginTopOffset);
 
-      if (oldReplyBounds.top < marginTopOffset) {
-        var scrollOffset = Math.abs(oldReplyBounds.top - marginTopOffset);
-        $mixmaxEditorIframe[0].contentWindow.postMessage(scrollOffset, '*');
-      } else if(oldReplyBounds.top >= marginTopOffset) {
-        $mixmaxEditorIframe[0].contentWindow.postMessage(0, '*');
-      }
+      // Forward scroll events to the iframe.
+      var scrollOffset = oldReplyBounds.top < marginTopOffset ? Math.abs(oldReplyBounds.top - marginTopOffset) : 0;
+      $mixmaxEditorIframe[0].contentWindow.postMessage(scrollOffset, '*');
 
       $mixmaxReply
         .css({
